@@ -1,11 +1,17 @@
 // action type บอกว่า Redux ตัวนี้ สามารถทำอะไรได้บ้าง
 export const actionTypes = {
+    MANAGELAYOUT_RESET: '[MANAGELAYOUT_RESET] Action',
     UPDATE_TABINDEXID: "[UPDATE_TABINDEXID] Action",
-
+    UPDATE_ITEMOPEN: "[UPDATE_ITEMOPEN] Action",
+    UPDATE_ITEMCLOSE: "[UPDATE_ITEMCLOSE] Action",
 };
 
 const initialState = {
     tabIndex: 0,
+    itemView: {
+        selectedItemId: 0,
+        showDialog: false
+    }
 }
 
 export const reducer =
@@ -17,7 +23,20 @@ export const reducer =
                     tabIndex: action.payload,
                 };
             }
-            //end layout redux
+            case actionTypes.UPDATE_ITEMOPEN: {
+                let newItemView = {
+                    selectedItemId: action.payload,
+                    showDialog: true
+                }
+                return { ...state, itemView: newItemView }
+            }
+            case actionTypes.UPDATE_ITEMCLOSE: {
+                let newItemView = {
+                    selectedItemId: 0,
+                    showDialog: false
+                }
+                return { ...state, itemView: newItemView }
+            }
 
             default:
                 return state;
@@ -26,10 +45,8 @@ export const reducer =
     };
 
 export const actions = {
-
-    updateTabIndex: (payload) => ({
-        type: actionTypes.UPDATE_TABINDEXID,
-        payload
-    }),
-
+    reset: () => ({ type: actionTypes.MANAGELAYOUT_RESET }),//LAYOUT_RESET
+    updateTabIndex: (payload) => ({ type: actionTypes.UPDATE_TABINDEXID, payload }),
+    updateItemOpen: (payload) => ({ type: actionTypes.UPDATE_ITEMOPEN, payload }),
+    updateItemClose: () => ({ type: actionTypes.UPDATE_ITEMCLOSE }),
 }

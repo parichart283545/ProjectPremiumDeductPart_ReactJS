@@ -34,7 +34,7 @@ function FormikUploader(props) {
         }}
       />
       {props.formik.errors[`${props.name}`] && (
-        <FormHelperText style={{fontSize:"18px"}}>{props.formik.errors[`${props.name}`]}</FormHelperText>
+        <FormHelperText style={{ fontSize: "18px" }}>{props.formik.errors[`${props.name}`]}</FormHelperText>
       )}
     </FormControl>
   );

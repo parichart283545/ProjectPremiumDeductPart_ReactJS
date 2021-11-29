@@ -12,6 +12,7 @@ function FormikDropdown(props) {
   return (
     <FormControl
       fullWidth
+      style={{ height: props.height }}
       disabled={props.disabled}
       error={
         props.formik.errors[`${props.name}`] &&
@@ -61,7 +62,8 @@ FormikDropdown.propTypes = {
   firstItemText: PropTypes.string,
   disableFirstItem: PropTypes.bool,
   selectedCallback: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  height: PropTypes.string,
 };
 
 // Same approach for defaultProps too
@@ -74,8 +76,9 @@ FormikDropdown.defaultProps = {
   displayFieldName: "name",
   firstItemText: "Do not forget to set firstItemText",
   disableFirstItem: true,
-  selectedCallback: () => {},
-  disabled: false
+  selectedCallback: () => { },
+  disabled: false,
+  height: "auto"
 };
 
 export default FormikDropdown;

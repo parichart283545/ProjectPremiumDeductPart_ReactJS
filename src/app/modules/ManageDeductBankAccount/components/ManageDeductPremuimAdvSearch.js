@@ -20,7 +20,10 @@ const useStyle = makeStyles((theme) => ({
     },
 }));
 
-function ManageDeductSearch() {
+
+
+function ManageDeductPremuimAdvSearch() {
+
     const classes = useStyle();
     const dispatch = useDispatch();
     const manageDeductReducer = useSelector(({ manageDeduct }) => manageDeduct)
@@ -30,18 +33,18 @@ function ManageDeductSearch() {
         enableReinitialize: true,
         validate: (values) => {
             const errors = {};
-            if (!values.searchDPAdvance) {
-                errors.searchDPAdvance = 'กรุณากรอกคำค้นหา';
+            if (!values.searchAdvanceWord) {
+                errors.searchAdvanceWord = 'กรุณากรอกคำค้นหา';
             }
-            updateSerchPromise(values.searchDPAdvance);
+            updateSerchPromise(values.searchDeductPremium);
             return errors;
         },
         initialValues: {
-            searchDPAdvance: manageDeductReducer.searchDPAdvance
+            searchDeductPremium: manageDeductReducer.searchDeductPremium
         },
         onSubmit: (values) => {
 
-            updateSerchPromise(values.searchDPAdvance).then(() => {
+            updateSerchPromise(values.searchDeductPremium).then(() => {
                 formik.setSubmitting(false);
             });
         },
@@ -51,7 +54,7 @@ function ManageDeductSearch() {
     //#region  Promise
     const updateSerchPromise = (search) =>
         new Promise((resolve) => {
-            dispatch(manageDeductRedux.actions.updateDPSearchAdvance(search));
+            dispatch(manageDeductRedux.actions.updateSearchAdvance(search));
             resolve();
         });
     //#endregion Promise
@@ -70,7 +73,7 @@ function ManageDeductSearch() {
                 <Grid item xs={12} lg={5}>
                     <FormikTextField
                         formik={formik}
-                        name="searchDPAdvance"
+                        name="searchDeductPremium"
                         label=""
                         placeholder="ระบุคำค้นหา"
                     />
@@ -104,4 +107,4 @@ function ManageDeductSearch() {
     )
 }
 
-export default ManageDeductSearch
+export default ManageDeductPremuimAdvSearch
